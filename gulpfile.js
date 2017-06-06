@@ -43,12 +43,29 @@ gulp.task('eslint', () => {
 
 // Local test server config
 gulp.task('serverStart', cb => {
-  localServer = spawn('sls', ['offline', 'start']);
+  localServer = spawn('sls', ['offline', 'start']
+  //,{detached: true, stdio: 'ignore'}
+  //,{stdio: 'inherit', shell: true} // FOR WINDOWS OS
+  );
+  localServer.on('error', err => {
+    console.error(err);
+    throw err;
+  });
+
+  /* */
+  localServer.stderr.on('data', data => {
+    console.log('stderr: ' + data);
+  });
   localServer.stdout.on('data', chunk => {
     if (chunk.toString().indexOf('listening on') > -1) {
       console.log(chunk.toString());
       cb();
     }
+  });
+
+
+  localServer.on('close', code => {
+    console.log('child process exited with code ' + code);
   });
 });
 

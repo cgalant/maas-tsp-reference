@@ -24,6 +24,7 @@ const networks = () => {
   return request
     .get(`${CITYBIKES_ENDPOINT_URL}/v2/networks`, {
       json: true,
+        verbose: true
     })
     .then(response => response)
     .catch(error => {

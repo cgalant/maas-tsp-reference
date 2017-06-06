@@ -1,0 +1,17 @@
+{
+  "name": "bookings-quickticket",
+  "version": "0.0.1",
+  "description": "Serverless module dependencies for MaasGlobal's QuickTicket TSP",
+  "author": "cgalant",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/"
+  },
+  "keywords": [],
+  "devDependencies": {},
+  "dependencies": {
+    "request-promise-lite": "^0.6.0"
+  }
+}

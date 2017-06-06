@@ -24,10 +24,14 @@ const validateEventData = event => (
       return reject(new Error(`400: "mode" should be "BICYCLE", got ${event.mode}`));
     }
 
+//    console.log('event.from:', event.from);
+//    console.log('event:', event);
+
     if (!validateCoordinates(parsed.from)) {
       return reject(new Error(`400: "from" should be valid coordinates, got ${event.from}`));
     }
 
+    console.log('should resolve');
     return resolve(parsed);
   })
 );

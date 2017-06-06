@@ -1,0 +1,915 @@
+{
+  "pricelistId": "B91D43D3-6202-4D18-AEFF-755C0932EDF9",
+  "validFrom": "2017-05-05T00:00:00+02:00",
+  "validUntil": "2020-12-31T00:00:00+01:00",
+  "categories": [
+    {
+      "categoryId": 7,
+      "categoryName": "Arlanda Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 2,
+          "subcategoryName": "Arlanda-Cityterminalen",
+          "fpFr": 1,
+          "fpTo": 2,
+          "group": 960,
+          "tickets": [
+            {
+              "ticketId": 1,
+              "priceInt": 112.26,
+              "priceExt": 112.26,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Arlanda-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 2,
+              "priceInt": 202.83,
+              "priceExt": 202.83,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Arlanda-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 4,
+              "priceInt": 93.4,
+              "priceExt": 93.4,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Arlanda-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 190,
+              "priceInt": 168.87,
+              "priceExt": 168.87,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Arlanda-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 375,
+              "priceInt": 329.25,
+              "priceExt": 329.25,
+              "vatFactor": 1.06,
+              "ticketType": "FAM",
+              "ticketTypeName": "Family, single",
+              "ticketName": "Arlanda-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 376,
+              "priceInt": 658.49,
+              "priceExt": 658.49,
+              "vatFactor": 1.06,
+              "ticketType": "TRF",
+              "ticketTypeName": "Family, return",
+              "ticketName": "Arlanda-Cityterminalen",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 43,
+          "subcategoryName": "Arlanda-Liljeholmen",
+          "fpFr": 136,
+          "fpTo": 2,
+          "group": 984,
+          "tickets": [
+            {
+              "ticketId": 255,
+              "priceInt": 112.26,
+              "priceExt": 112.26,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Arlanda-Liljeholmen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 256,
+              "priceInt": 202.83,
+              "priceExt": 202.83,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Arlanda-Liljeholmen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 257,
+              "priceInt": 93.4,
+              "priceExt": 93.4,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Arlanda-Liljeholmen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 258,
+              "priceInt": 168.87,
+              "priceExt": 168.87,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Arlanda-Liljeholmen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 377,
+              "priceInt": 329.25,
+              "priceExt": 329.25,
+              "vatFactor": 1.06,
+              "ticketType": "FAM",
+              "ticketTypeName": "Family, single",
+              "ticketName": "Arlanda-Liljeholmen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 378,
+              "priceInt": 658.49,
+              "priceExt": 658.49,
+              "vatFactor": 1.06,
+              "ticketType": "TRF",
+              "ticketTypeName": "Family, return",
+              "ticketName": "Arlanda-Liljeholmen",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 46,
+          "subcategoryName": "Arlanda-Kista/Sundbyberg/Bromma",
+          "fpFr": 112,
+          "fpTo": 2,
+          "group": 985,
+          "tickets": [
+            {
+              "ticketId": 345,
+              "priceInt": 112.26,
+              "priceExt": 112.26,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Arlanda-Kista/Sundbyberg/Bromma",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 346,
+              "priceInt": 202.83,
+              "priceExt": 202.83,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Arlanda-Kista/Sundbyberg/Bromma",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 347,
+              "priceInt": 93.4,
+              "priceExt": 93.4,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Arlanda-Kista/Sundbyberg/Bromma",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 348,
+              "priceInt": 168.87,
+              "priceExt": 168.87,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Arlanda-Kista/Sundbyberg/Bromma",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 379,
+              "priceInt": 329.25,
+              "priceExt": 329.25,
+              "vatFactor": 1.06,
+              "ticketType": "FAM",
+              "ticketTypeName": "Family, single",
+              "ticketName": "Arlanda-Kista/Sundbyberg/Bromma",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 380,
+              "priceInt": 658.49,
+              "priceExt": 658.49,
+              "vatFactor": 1.06,
+              "ticketType": "TRF",
+              "ticketTypeName": "Family, return",
+              "ticketName": "Arlanda-Kista/Sundbyberg/Bromma",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ungdomsbiljett gäller personer från 16 till och med 25 år. Upp till fyra barn under 16 år får följa med en fullt betalande vuxen utan kostnad (ej pensionär-/ungdomsbiljett). Pensionärsbiljett gäller ålderspensionärer från 65 år."
+    },
+    {
+      "categoryId": 5,
+      "categoryName": "Bromma Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 14,
+          "subcategoryName": "Bromma-Cityterminalen",
+          "fpFr": 1,
+          "fpTo": 5,
+          "group": 973,
+          "tickets": [
+            {
+              "ticketId": 24,
+              "priceInt": 80.19,
+              "priceExt": 80.19,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Bromma-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 27,
+              "priceInt": 146.23,
+              "priceExt": 146.23,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Bromma-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 28,
+              "priceInt": 65.09,
+              "priceExt": 65.09,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Bromma-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 192,
+              "priceInt": 117.92,
+              "priceExt": 117.92,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Bromma-Cityterminalen",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ungdomsbiljett gäller personer från 16 till och med 25 år. Upp till fyra barn under 16 år får följa med en fullt betalande vuxen utan kostnad (ej pensionär-/ungdomsbiljett). Pensionärsbiljett gäller ålderspensionärer från 65 år."
+    },
+    {
+      "categoryId": 77,
+      "categoryName": "Destination Gotland",
+      "subcategories": [
+        {
+          "subcategoryId": 42,
+          "subcategoryName": "Nynäshamn-Cityterminalen",
+          "fpFr": 1,
+          "fpTo": 6,
+          "group": 974,
+          "tickets": [
+            {
+              "ticketId": 424,
+              "priceInt": 0,
+              "priceExt": 0,
+              "vatFactor": 1.06,
+              "ticketType": "BAR",
+              "ticketTypeName": "Child, single",
+              "ticketName": "Nynäshamn-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 215,
+              "priceInt": 102.83,
+              "priceExt": 102.83,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Nynäshamn-Cityterminalen",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Två barn tom 11 år reser utan kostnad tillsammans med fullt betalande vuxen. Reser en vuxen med fler än två barn betalas fullpris från och med barn nummer tre.\r\n\r\nIngen ungdoms-, pensionärs- eller studentrabatt."
+    },
+    {
+      "categoryId": 19,
+      "categoryName": "Göteborg Landvetter Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 17,
+          "subcategoryName": "Landvetter-Göteborg",
+          "fpFr": 20,
+          "fpTo": 21,
+          "group": 202,
+          "tickets": [
+            {
+              "ticketId": 34,
+              "priceInt": 99.06,
+              "priceExt": 99.06,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Landvetter-Göteborg",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 37,
+              "priceInt": 183.96,
+              "priceExt": 183.96,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Landvetter-Göteborg",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 38,
+              "priceInt": 83.96,
+              "priceExt": 83.96,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Landvetter-Göteborg",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 230,
+              "priceInt": 155.66,
+              "priceExt": 155.66,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Landvetter-Göteborg",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ungdomsbiljett gäller personer från 8 till och med 17 år. Upp till fyra barn under 8 år får följa med en fullt betalande vuxen utan kostnad (ej ungdomsbiljett). Ingen pensionärsrabatt."
+    },
+    {
+      "categoryId": 20,
+      "categoryName": "Malmö Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 12,
+          "subcategoryName": "Malmö Airport-Malmö",
+          "fpFr": 10,
+          "fpTo": 12,
+          "group": 110,
+          "tickets": [
+            {
+              "ticketId": 39,
+              "priceInt": 108.49,
+              "priceExt": 108.49,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Malmö Airport-Malmö",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 42,
+              "priceInt": 197.17,
+              "priceExt": 197.17,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Malmö Airport-Malmö",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 43,
+              "priceInt": 89.62,
+              "priceExt": 89.62,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Malmö Airport-Malmö",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 237,
+              "priceInt": 168.87,
+              "priceExt": 168.87,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Malmö Airport-Malmö",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 9,
+          "subcategoryName": "Malmö Airport-Lund",
+          "fpFr": 13,
+          "fpTo": 12,
+          "group": 111,
+          "tickets": [
+            {
+              "ticketId": 74,
+              "priceInt": 108.49,
+              "priceExt": 108.49,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Malmö Airport-Lund",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 77,
+              "priceInt": 197.17,
+              "priceExt": 197.17,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Malmö Airport-Lund",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 78,
+              "priceInt": 89.62,
+              "priceExt": 89.62,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Malmö Airport-Lund",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 235,
+              "priceInt": 168.87,
+              "priceExt": 168.87,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Malmö Airport-Lund",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 29,
+          "subcategoryName": "Malmö Airport-Svedala",
+          "fpFr": 318,
+          "fpTo": 12,
+          "group": 110,
+          "tickets": [
+            {
+              "ticketId": 123,
+              "priceInt": 37.74,
+              "priceExt": 37.74,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Malmö Airport-Svedala",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 126,
+              "priceInt": 66.04,
+              "priceExt": 66.04,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Malmö Airport-Svedala",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 127,
+              "priceInt": 23.58,
+              "priceExt": 23.58,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Malmö Airport-Svedala",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ungdomsbiljett gäller personer från 16 till och med 25 år. Upp till fyra barn under 16 år får följa med en fullt betalande vuxen utan kostnad (ej pensionär-/ungdomsbiljett). Pensionärsbiljett gäller ålderspensionärer från 65 år."
+    },
+    {
+      "categoryId": 70,
+      "categoryName": "Skavsta Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 21,
+          "subcategoryName": "Skavsta-Stockholm",
+          "fpFr": 1,
+          "fpTo": 8,
+          "group": 976,
+          "tickets": [
+            {
+              "ticketId": 79,
+              "priceInt": 150,
+              "priceExt": 150,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Skavsta-Stockholm",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 82,
+              "priceInt": 268.87,
+              "priceExt": 268.87,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Skavsta-Stockholm",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 83,
+              "priceInt": 127.36,
+              "priceExt": 127.36,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Skavsta-Stockholm",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 138,
+              "priceInt": 231.13,
+              "priceExt": 231.13,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Skavsta-Stockholm",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 22,
+          "subcategoryName": "Skavsta-Linköping",
+          "fpFr": 120,
+          "fpTo": 8,
+          "group": 981,
+          "tickets": [
+            {
+              "ticketId": 98,
+              "priceInt": 150,
+              "priceExt": 150,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Skavsta-Linköping",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 101,
+              "priceInt": 263.21,
+              "priceExt": 263.21,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Skavsta-Linköping",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 102,
+              "priceInt": 127.36,
+              "priceExt": 127.36,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Skavsta-Linköping",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 140,
+              "priceInt": 225.47,
+              "priceExt": 225.47,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Skavsta-Linköping",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 26,
+          "subcategoryName": "Skavsta-Norrköping",
+          "fpFr": 121,
+          "fpTo": 8,
+          "group": 981,
+          "tickets": [
+            {
+              "ticketId": 108,
+              "priceInt": 131.13,
+              "priceExt": 131.13,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Skavsta-Norrköping",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 111,
+              "priceInt": 234.91,
+              "priceExt": 234.91,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Skavsta-Norrköping",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 112,
+              "priceInt": 112.26,
+              "priceExt": 112.26,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Skavsta-Norrköping",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 142,
+              "priceInt": 202.83,
+              "priceExt": 202.83,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Skavsta-Norrköping",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ungdomsbiljett gäller personer från 12 till och med 25 år. Upp till två barn under 12 år får följa med en fullt betalande vuxen utan kostnad (ej pensionär-/ungdomsbiljett). Pensionärsbiljett gäller ålderspensionärer från 65 år."
+    },
+    {
+      "categoryId": 78,
+      "categoryName": "Tallink Silja",
+      "subcategories": [
+        {
+          "subcategoryId": 51,
+          "subcategoryName": "Tallink Silja Värtahamnen-Cityterminalen",
+          "fpFr": 1,
+          "fpTo": 151,
+          "group": 987,
+          "tickets": [
+            {
+              "ticketId": 373,
+              "priceInt": 56.6,
+              "priceExt": 56.6,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 374,
+              "priceInt": 94.34,
+              "priceExt": 94.34,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 446,
+              "priceInt": 37.74,
+              "priceExt": 37.74,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketGroup": "Barn 6-17 år",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 447,
+              "priceInt": 56.6,
+              "priceExt": 56.6,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketGroup": "Barn 6-17 år",
+              "ticketRules": []
+            }
+          ]
+        },
+        {
+          "subcategoryId": 52,
+          "subcategoryName": "Tallink Silja Värtahamnen-Djurgården",
+          "fpFr": 152,
+          "fpTo": 151,
+          "group": 987,
+          "tickets": [
+            {
+              "ticketId": 373,
+              "priceInt": 56.6,
+              "priceExt": 56.6,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 374,
+              "priceInt": 94.34,
+              "priceExt": 94.34,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 446,
+              "priceInt": 37.74,
+              "priceExt": 37.74,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketGroup": "Barn 6-17 år",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 447,
+              "priceInt": 56.6,
+              "priceExt": 56.6,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården",
+              "ticketGroup": "Barn 6-17 år",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ej ungdoms-, pensionärs- eller studentrabatt. Två barn tom 11 år reser utan kostnad tillsammans med fullt betalande vuxen. Reser en vuxen med fler än två barn betalas fullpris från och med barn nummer tre."
+    },
+    {
+      "categoryId": 76,
+      "categoryName": "Viking Line",
+      "subcategories": [
+        {
+          "subcategoryId": 40,
+          "subcategoryName": "Vikingterminalen-Cityterminalen",
+          "fpFr": 1,
+          "fpTo": 7,
+          "group": 975,
+          "tickets": [
+            {
+              "ticketId": 204,
+              "priceInt": 51.89,
+              "priceExt": 51.89,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Vikingterminalen-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 205,
+              "priceInt": 84.91,
+              "priceExt": 84.91,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Vikingterminalen-Cityterminalen",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 442,
+              "priceInt": 28.3,
+              "priceExt": 28.3,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Vikingterminalen-Cityterminalen",
+              "ticketGroup": "Barn 6-11 år",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 443,
+              "priceInt": 47.17,
+              "priceExt": 47.17,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Vikingterminalen-Cityterminalen",
+              "ticketGroup": "Barn 6-11 år",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ej ungdoms-, pensionärs- eller studentrabatt. Två barn tom 11 år reser utan kostnad tillsammans med fullt betalande vuxen. Reser en vuxen med fler än två barn betalas fullpris från och med barn nummer tre."
+    },
+    {
+      "categoryId": 73,
+      "categoryName": "Visby Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 25,
+          "subcategoryName": "Visby Flygplats-Visby",
+          "fpFr": 51,
+          "fpTo": 50,
+          "group": 983,
+          "tickets": [
+            {
+              "ticketId": 93,
+              "priceInt": 56.6,
+              "priceExt": 56.6,
+              "vatFactor": 1.06,
+              "ticketType": "ENK",
+              "ticketTypeName": "Adult, single",
+              "ticketName": "Visby flygplats-Visby",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 96,
+              "priceInt": 103.77,
+              "priceExt": 103.77,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Visby flygplats-Visby",
+              "ticketRules": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "categoryId": 74,
+      "categoryName": "Västerås Airport",
+      "subcategories": [
+        {
+          "subcategoryId": 28,
+          "subcategoryName": "Västerås-Stockholm",
+          "fpFr": 1,
+          "fpTo": 9,
+          "group": 977,
+          "tickets": [
+            {
+              "ticketId": 121,
+              "priceInt": 268.87,
+              "priceExt": 268.87,
+              "vatFactor": 1.06,
+              "ticketType": "TOR",
+              "ticketTypeName": "Adult, return",
+              "ticketName": "Västerås-Stockholm",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 122,
+              "priceInt": 127.36,
+              "priceExt": 127.36,
+              "vatFactor": 1.06,
+              "ticketType": "UNG",
+              "ticketTypeName": "Youth, single",
+              "ticketName": "Västerås-Stockholm",
+              "ticketRules": []
+            },
+            {
+              "ticketId": 146,
+              "priceInt": 231.13,
+              "priceExt": 231.13,
+              "vatFactor": 1.06,
+              "ticketType": "TRU",
+              "ticketTypeName": "Youth, return",
+              "ticketName": "Västerås-Stockholm",
+              "ticketRules": []
+            }
+          ]
+        }
+      ],
+      "information": "Ungdomsbiljett gäller personer från 12 till och med 25 år. Upp till två barn under 12 år får följa med en fullt betalande vuxen utan kostnad (ej pensionär-/ungdomsbiljett). Pensionärsbiljett gäller ålderspensionärer från 65 år."
+    }
+  ]
+}
