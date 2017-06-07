@@ -1,0 +1,39 @@
+{
+  "options": [
+    {
+      "cost": {
+        "amount": 112.2642,  // .priceExt, or 0
+        "currency": "SEK"
+      },
+      "terms": {
+        "validity": {  // How long is this option available/valid for? for example priceList.validUntil
+          "startTime": 1495555200000,
+          "endTime": 1512432000000
+        }
+      },
+      "tspProduct": {
+        "id": "QT-1"  // unique id for this ticket option, example format QT-{ticketId}, category id etc can be added also
+      },
+      "meta": {
+        "MODE_BUS": {},  // required by schema, atm no fields though
+      },
+      "leg": {
+        "from": {
+          "name": "Stockholm Arlanda",  // pass-through, fromName
+          "address": "country:Sweden|city:Stockholm-Arlanda|streetName:Pelargången|streetNumber:1C|zipCode:190 60", // pass-through, fromAddress
+          "lat": 59.648993, // Number(from.split(',')[0])
+          "lon": 17.929866  // Number(from.split(',')[1])
+        },
+        "to": {
+          "address": "country:Sweden|city:Märsta|zipCode:195 40|streetName:Västra Bangatan|streetNumber:34",
+          "lat": 59.628234,
+          "lon": 17.860857
+        },
+        "startTime": 1495555200000,  // pass-through, startTime
+        "endTime": 1495557000000, // pass-through, endTime
+        "mode": "BUS"  // pass-through, mode
+      }
+    }
+    // ... - other options omitted
+  ]
+}

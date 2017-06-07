@@ -1,0 +1,11 @@
+{
+  "mode": "BUS",
+  "fromName": "Stockholm Arlanda",
+  "fromAddress": "country:Sweden|city:Stockholm-Arlanda|streetName:Pelargången|streetNumber:1C|zipCode:190 60",
+  "from": "59.648993,17.929866",
+  "toName": "",
+  "toAddress": "country:Sweden|city:Märsta|zipCode:195 40|streetName:Västra Bangatan|streetNumber:34",
+  "to": "59.628234,17.860857",
+  "startTime": "1495555200000",
+  "endTime": "1495557000000"
+}
