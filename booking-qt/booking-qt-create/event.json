@@ -14,12 +14,10 @@
   "leg": {
     "from": {
       "name": "Stockholm Arlanda",
-      "address": "country:Sweden|city:Stockholm-Arlanda|streetName:Pelargången|streetNumber:1C|zipCode:190 60",
       "lat": 59.648993,
       "lon": 17.929866
     },
     "to": {
-      "address": "country:Sweden|city:Märsta|zipCode:195 40|streetName:Västra Bangatan|streetNumber:34",
       "lat": 59.628234,
       "lon": 17.860857
     },
