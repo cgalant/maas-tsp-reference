@@ -1,0 +1,30 @@
+{
+  "customer": {
+    "firstName": "Frida",
+    "lastName": "Smith",
+    "email": "frida.smith@example.com",
+    "phone": "+46701234567"
+  },
+  "tspProduct": {
+    "id": "QT-1"
+  },
+  "meta": {
+    "MODE_BUS": {}
+  },
+  "leg": {
+    "from": {
+      "name": "Stockholm Arlanda",
+      "address": "country:Sweden|city:Stockholm-Arlanda|streetName:Pelargången|streetNumber:1C|zipCode:190 60",
+      "lat": 59.648993,
+      "lon": 17.929866
+    },
+    "to": {
+      "address": "country:Sweden|city:Märsta|zipCode:195 40|streetName:Västra Bangatan|streetNumber:34",
+      "lat": 59.628234,
+      "lon": 17.860857
+    },
+    "startTime": 1495555200000,
+    "endTime": 1495557000000,
+    "mode": "BUS"
+  }
+}
