@@ -1,0 +1,37 @@
+{
+  "reservationId": "9ebf5f9c-4e6f-4cc2-a1c9-06684e7910d5",
+  "reservationCode": "957087",
+  "validFrom": "2017-06-07T00:00:00+02:00",
+  "validUntil": "2017-09-07T00:00:00+02:00",
+  "clientId": "",
+  "sellerId": "",
+  "barcodeData": "442721858793705778412",
+  "barcodeUrl": "/api/aztec/442721858793705778412",
+  "plusCode": "",
+  "reservationUrl": "https://test.flygbussarna.se/qt/t/442721858793705778412",
+  "tickets": [
+    {
+      "ticketId": 373,
+      "quantity": 1,
+      "price": 56.6,
+      "ticketType": "ENK",
+      "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården Enkel Vuxen",
+      "tripsLeft": 1,
+      "vatFactor": 1.06
+    },
+    {
+      "ticketId": 374,
+      "quantity": 1,
+      "price": 94.34,
+      "ticketType": "TOR",
+      "ticketName": "Tallink Silja Värtahamnen-Cityterm./Djurgården Tur & Retur Vuxen",
+      "tripsLeft": 2,
+      "vatFactor": 1.06
+    }
+  ],
+  "customer": null,
+  "cancellationTime": null,
+  "reservationTime": "2017-06-07T11:10:57.473+02:00",
+  "cancellable": true,
+  "paymentStatus": 40
+}

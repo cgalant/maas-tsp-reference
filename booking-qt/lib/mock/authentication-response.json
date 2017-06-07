@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "token": "TQ3hugrnTVafoUVt2D1tbszK9ol1BYHGyrFvGCQd388jJTAXEYTWXaWbsWjPb/VoKGrJvr3MYTcNnXRvwonZF9cZu35QkEaYIj3EwU//oNr8by2BugjRBVmcxNomT8DU/AG2DqrZedKqyH5bfOZ90y6D8cnh0iU9TXVc2ANh+wdRyml5RUhXKoJNNwhCWUzJ",
+  "userinfo": {
+    "username": "DIGITALFAC",
+    "name": "Digital Factory",
+    "cancellablePeriod": "00:00:00",
+    "canSearchReservations": false,
+    "sellerId": null
+  }
+}
