@@ -51,9 +51,28 @@ const create = (ticketId) => {
 //      console.error("create error:", error);
       return Promise.reject(error);
     });
-}
+};
+
+const getReservation = (id) => {
+  return request
+    .get(`${QUICKTICKET_ENDPOINT_URL}/reservation/${id}`, {
+      headers: {
+        'Content-Type':'application/json',
+        'Accept':'application/json',
+        'X-AuthToken': USER_TOKEN
+      },
+      json: true
+      //,verbose: true
+    })
+    .then(response => response)
+    .catch(error => {
+//      console.error("get reservation error:", error);
+      return Promise.reject(error);
+    });
+};
 
 module.exports = {
   pricelist: pricelist,
-  create: create
+  create: create,
+  getReservation: getReservation
 }

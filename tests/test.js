@@ -29,4 +29,7 @@ describe('MaaS Transport Service Providers', () => {
   // require('./tsp/response-schema-validation.js');
   // require('./tsp/api-validation.js');
   require('./tsp/booking-process-test.js');
+
+//  require('./tsp/booking-retrieve-test.js');
+
 });
