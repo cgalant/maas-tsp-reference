@@ -1,5 +1,5 @@
 {
-  "name": "bookings-quickticket",
+  "name": "booking-qt",
   "version": "0.0.1",
   "description": "Serverless module dependencies for MaasGlobal's QuickTicket TSP",
   "author": "cgalant",
