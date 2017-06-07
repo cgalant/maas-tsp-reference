@@ -71,8 +71,26 @@ const getReservation = (id) => {
     });
 };
 
+const cancel = (id) => {
+  return request
+    .del(`${QUICKTICKET_ENDPOINT_URL}/reservation/${id}`, {
+      headers: {
+        'Content-Type':'application/json',
+        'Accept':'application/json',
+        'X-AuthToken': USER_TOKEN
+      }//,json: true
+      //,verbose: true
+    })
+    .then(response => response)
+    .catch(error => {
+//      console.error("cancel reservation error:", error);
+      return Promise.reject(error);
+    });
+}
+
 module.exports = {
   pricelist: pricelist,
   create: create,
-  getReservation: getReservation
+  getReservation: getReservation,
+  cancel: cancel
 }
