@@ -23,7 +23,11 @@ const pricelist = () => {
       json: true
       //,verbose: true
     })
-    .then(response => response)
+    .then(response => {
+      logger.info("pricelist response returns with id=" + response.pricelistId);
+//      logger.debug("pricelist response", response);
+      return response;
+    })
     .catch(error => {
         logger.error("pricelist error:", error);
         return Promise.reject(error);
@@ -61,7 +65,7 @@ const create = (ticketId, customer) => {
     })
     .then(response => {
       logger.info("reservation created with id="+response.reservationId);
-      logger.debug("create response", response);
+//      logger.debug("create response", response);
       return response
     })
     .catch(error => {
@@ -71,6 +75,7 @@ const create = (ticketId, customer) => {
 };
 
 const getReservation = (id) => {
+  logger.info("call getReservationDetail with id="+id);
   return request
     .get(`${QUICKTICKET_ENDPOINT_URL}/reservation/${id}`, {
       headers: {
@@ -83,12 +88,13 @@ const getReservation = (id) => {
     })
     .then(response => response)
     .catch(error => {
-//      console.error("get reservation error:", error);
+      logger.error("getReservationDetail error:", error);
       return Promise.reject(error);
     });
 };
 
 const cancel = (id) => {
+  logger.info("call cancel reservation with id="+id);
   return request
     .del(`${QUICKTICKET_ENDPOINT_URL}/reservation/${id}`, {
       headers: {
@@ -99,7 +105,7 @@ const cancel = (id) => {
     })
     .then(response => response)
     .catch(error => {
-//      console.error("cancel reservation error:", error);
+      logger.error("cancel reservation error:", error);
       return Promise.reject(error);
     });
 }
