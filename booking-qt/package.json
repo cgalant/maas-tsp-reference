@@ -12,6 +12,6 @@
   "keywords": [],
   "devDependencies": {},
   "dependencies": {
-    "request-promise-lite": "^0.6.0"
+    "request-promise-lite": "0.7.0"
   }
 }
