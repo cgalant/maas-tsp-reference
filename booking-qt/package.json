@@ -12,6 +12,7 @@
   "keywords": [],
   "devDependencies": {},
   "dependencies": {
-    "request-promise-lite": "0.7.0"
+    "request-promise-lite": "0.7.0",
+    "log4js": "^1.1.1"
   }
 }
