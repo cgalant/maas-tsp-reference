@@ -37,29 +37,32 @@ const euclideanDistance = (p1, p2, q1, q2) => {
  * @param {array} a list of locations. Actual coordinates are stored inside item.location.latitude
  */
 const nearestLocation = (reference, locations) => {
+//  console.log("nearestLocation reference=",reference);
+//  console.log("nearestLocation locations=",locations);
   const threshold = 0.3; // Rough estimation of city sized areas ~15-30km
   let nearest = locations.reduce((prev, curr) => (
     // NOTE: This is a comparison between calculated distances and finding the shortest one
     euclideanDistance(
       reference.lat,
       reference.lon,
-      prev.location.latitude,
-      prev.location.longitude
+      prev.lat,
+      prev.lon
     )
     // Comparison operator
     <
     euclideanDistance(
       reference.lat,
       reference.lon,
-      curr.location.latitude,
-      curr.location.longitude
+      curr.lat,
+      curr.lon
     ) ? prev : curr
   ));
 
   //Check if closest found network is inside boundaries
-  if (! (euclideanDistance(reference.lat, reference.lon, nearest.location.latitude, nearest.location.longitude) < threshold)) {
+  if (! (euclideanDistance(reference.lat, reference.lon, nearest.lat, nearest.lon) < threshold)) {
     nearest = {};
   }
+//  console.log("euclideanDistance nearest=",nearest);
   return nearest;
 };
 

@@ -21,8 +21,6 @@ const validateEventData = event => (
       }
     }
 
-
-
     const parsed = {
       mode: event.mode,
       from: parsedEventFrom,
@@ -39,6 +37,8 @@ const validateEventData = event => (
     if (!validateCoordinates(parsed.from)) {
       return reject(new Error(`400: "from" should be valid coordinates, got ${event.from}`));
     }
+//    console.log("validateEventData parsedEventFrom=", parsedEventFrom);
+//    console.log("validateEventData parsed=", parsed);
 
     return resolve(parsed);
   })
@@ -52,10 +52,10 @@ const validateEventData = event => (
  * @param {number} location
  * @returns {Promise} A promise that resolves with a found newtork, rejects if no close matches are found
  */
-const findNearestNetwork = (networks, location) => (
+const findNearestLocation = (places, location) => (
   new Promise((resolve, reject) => {
-    const nearestNetwork = nearestLocation(location, networks.networks);
-    return resolve(nearestNetwork.href);
+    const nearest = nearestLocation(location, places);
+    return resolve(nearest);
   })
 );
 
@@ -136,5 +136,125 @@ const optionsList = (event, callback) => {
     .catch(error => callback(error));
 
 };
+const refbuilder = require('../lib/referential-builder');
 
-module.exports.optionsList = optionsList;
+const findNearestPlace = (places, place) => {
+  console.log("findNearestPlace places", places)
+  console.log("findNearestPlace place", place)
+  const nearestPlace = places.filter(p => p.coords==place.id);
+  return nearestPlace;
+}
+
+const optionsList2 = (event, callback) => {
+
+  var from = null;
+  var pricelist = null;
+  var locationsMap = null;
+  var locationsList = null;
+
+  return validateEventData(event)
+    .then(validatedEvent => {
+      from = validatedEvent.from;
+      locationsMap = refbuilder.loadLocations();
+      pricelist = refbuilder.loadPriceList();
+      locationsList = refbuilder.convertAsList(locationsMap);
+      return locationsList;
+    })
+    /*
+    .then(results => {
+      console.log(results);
+      return results;
+    })*/
+    .then(results => findNearestLocation(results, from))
+    .then(nearest => findLegs(locationsMap[nearest.id]))
+    .then(legs=> filterLegsByDestination(legs, event.to))
+    .then(place => formatResponse2(place, event, pricelist.categories))
+    .then(result => callback(null, result))
+    .catch(error => callback(error));
+
+};
+
+function filterLegsByDestination(legs, dest){
+  console.log("filterLegsByDestination with dest=",dest)
+  if(!dest){
+    return legs;
+  }
+  //TODO
+  return legs;
+}
+
+function findLegs(departures){
+//  console.log("findLegs departures=", departures);
+  const ref = refbuilder.loadReferential()
+
+  const found = departures.map(dept =>{
+    return ref.filter(cat => cat.id==dept.from.categoryId && cat.subcategoryId == dept.from.subcategoryId)
+  });
+  var legs = [].concat.apply([],found);
+//  console.log("legs ", legs );
+  return legs;
+}
+
+function formatResponse2(legs, parsedRequest, categories) {
+
+//  console.log("formatResponse2 legs", legs);
+//  console.log("formatResponse2 parsedRequest", parsedRequest);
+//  console.log("formatResponse2 categories", categories);
+
+  const formattedStations = legs.map(leg => {
+
+    //console.log("leg=",leg);
+
+//    const cats = categories.find((cat, index, arr) => leg.id == cat.categoryId);
+    const cat = categories.find(function(el, index, arr){
+      return leg.id == el.categoryId
+    });
+    //console.log("cat found : ",cat);
+
+
+    const subcat = cat.subcategories.find((subcat, index, arr) => leg.subcategoryId == subcat.subcategoryId);
+    const tickets = subcat.tickets;
+    const res = tickets.filter(t => t.ticketType==TICKETTYPE_ADULT_SINGLE);
+    const ticket = res[0];
+    const finalPriceForCustomer = Math.round(ticket.priceExt * ticket.vatFactor * 100) / 100;
+
+
+    return {
+      cost: {
+        amount: finalPriceForCustomer,
+        currency: DEFAULT_CURRENCY
+      },
+      terms: {
+
+      },
+      tspProduct:{
+        id: "QT-"+ticket.ticketId
+      },
+      leg: {
+        mode: 'BUS',
+        startTime: parsedRequest.startTime,
+        endTime: parsedRequest.endTime,
+        from: {
+          lat: leg.first.lat,
+          lon: leg.first.long,
+        },
+        to: {
+          lat: leg.last.lat,
+          lon: leg.last.long,
+        },
+      },
+      meta: {
+        MODE_BUS: {
+        }
+      }
+    }
+  });
+
+//  console.log(formattedStations);
+  return {
+    options: formattedStations,
+  };
+
+}
+
+module.exports.optionsList = optionsList2;

@@ -16,7 +16,10 @@ function loadLocations(){
   const coords = refbuider.loadLocations();
   console.log(coords);
 }
-
+function testRequestAndSavePriceList(){
+  refbuider.requestAndSavePriceList();
+}
 //testCreateRef();
 //extractLocations();
-loadLocations();
+//loadLocations();
+testRequestAndSavePriceList();

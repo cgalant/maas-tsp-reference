@@ -45,6 +45,22 @@ const createReferential = () => {
   });
 }
 
+const requestAndSavePriceList = () => {
+  qtapi.pricelist().then(responses => {
+    logger.info("saving pricelist.json", responses);
+    fs.writeFileSync('./lib/data/pricelist.json', JSON.stringify(responses));
+  }).catch(error => {
+    logger.error("requestAndSavePriceList error:", error);
+    //return Promise.reject(error);
+  });
+}
+
+const loadPriceList = () => {
+  const content = fs.readFileSync('./lib/data/pricelist.json');
+  const res = JSON.parse(content);
+  return res;
+}
+
 const getAllSubcategories = () => {
   logger.info("call getAllSubcategories");
 
@@ -131,12 +147,30 @@ const extractLocations = () => {
 const loadLocations = () => {
   const res = fs.readFileSync('./lib/data/locationsGroupedBy.json');
   const locations = JSON.parse(res);
+  return locations;
+}
+
+const convertAsList = (locations) => {
   var coords = [];
-  for(var loc in locations){
+  for(var key in locations){
 //    logger.debug(loc, locations[loc].length);
-    coords.push(loc);
+
+    const loc = locations[key][0];
+    //logger.debug(loc);
+    /*
+    const newLoc = {
+      id: key,
+      lat: loc.lat,
+      lon: loc.lon
+    };*/
+    const newLoc = Object.assign({}, loc, {
+      id: key
+    })
+    coords.push(newLoc);
   }
+//  logger.debug("coords", coords);
   return coords;
+
 }
 
 
@@ -166,7 +200,11 @@ var groupBy = function(xs, key) {
 
 module.exports = {
 //  getRoute: getRoute,
+  requestAndSavePriceList: requestAndSavePriceList,
+  loadPriceList: loadPriceList,
   createReferential: createReferential,
+  loadReferential:loadReferential,
   extractLocations:extractLocations,
-  loadLocations:loadLocations
+  loadLocations:loadLocations,
+  convertAsList:convertAsList
 }
