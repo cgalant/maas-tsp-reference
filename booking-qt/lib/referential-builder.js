@@ -6,30 +6,78 @@ const fs = require('fs');
 const log4js = require('log4js');
 const logger = log4js.getLogger("REF-BUILDER");
 
+
+const extractLocations = (routes) => {
+  logger.info("extractLocations");
+
+  const locations = routes.map(route => {
+    const location1 = createLocation(route, route.first);
+    const location2 = createLocation(route, route.last);
+
+    return [location1, location2]
+  })
+
+  const flattened = [].concat.apply([],locations);
+  const filtered = flattened.filter(loc=>loc!=null);
+  var grouped = groupBy(filtered, 'coords');
+  logger.debug("extractLocations grouped=", grouped);
+
+  return grouped;
+}
+
+const buildReferential = priceListResponse => {
+  logger.info("buildReferential");
+
+  return new Promise((resolve, reject) => {
+
+    const routes = buildSubcategoryList(priceListResponse)
+  //    .then(routes => {
+
+        const newRoutesRequests = fetchRoutesInfo(routes);
+
+        Promise.all(newRoutesRequests).then(responses => {
+          logger.debug("buildReferential newRoutes", responses);
+          resolve(responses);
+        }).catch(error => {
+          logger.error("buildReferential saving referential error:", error);
+          reject(error);
+        });
+  //    })
+  });
+
+};
+
+
+
+const fetchRoutesInfo = routes => {
+  logger.info("fetchRoutesInfo")
+  return routes.map(route => {
+    return new Promise((resolve, reject) => {
+      getRoute(route.subcategoryId).then(locations => {
+
+        const newRoute = Object.assign({}, route, {
+          stations: locations,
+          first: locations[0],
+          last: locations[locations.length - 1]
+        });
+
+//        logger.info("newRoute=",newRoute);
+        return resolve(newRoute);
+      }).catch(error => {
+        logger.error("fetchRoutesInfo getRoute(" + route.subcategoryId + ") call error:", error);
+        return reject(error);
+      });
+    });
+  });
+}
+
 const createReferential = () => {
 
   logger.info("call createReferential");
 
   getAllSubcategories().then(routes => {
 
-    const newRoutesRequests = routes.map(route => {
-      return new Promise((resolve, reject) => {
-        getRoute(route.subcategoryId).then(locations => {
-
-          const newRoute = Object.assign({}, route, {
-            stations: locations,
-            first: locations[0],
-            last: locations[locations.length - 1]
-          });
-
-//        logger.info("newRoute=",newRoute);
-          return resolve(newRoute);
-        }).catch(error => {
-          logger.error("createReferential geRoute(" + route.subcategoryId + ") call error:", error);
-          return reject(error);
-        });
-      });
-    });
+    const newRoutesRequests = fetchRoutesInfo(routes);
 
     Promise.all(newRoutesRequests).then(responses => {
       logger.info("newRoutes", responses);
@@ -55,7 +103,7 @@ const requestAndSavePriceList = () => {
   });
 }
 
-const loadPriceList = () => {
+const loadPriceListFromFile = () => {
   const content = fs.readFileSync('./lib/data/pricelist.json');
   const res = JSON.parse(content);
   return res;
@@ -64,27 +112,33 @@ const loadPriceList = () => {
 const getAllSubcategories = () => {
   logger.info("call getAllSubcategories");
 
-  return qtapi.pricelist().then(response => {
-    const routesByCat = response.categories.map(cat => {
-      const routeBase = {
-        id: cat.categoryId,
-        name: cat.categoryName
-      };
-      return cat.subcategories.map(subcat => {
-        return Object.assign( {}, routeBase, {
-          subcategoryId: subcat.subcategoryId,
-          subcategoryName: subcat.subcategoryName
-        });
-      });
-    });
-
-    var routes = [].concat.apply([],routesByCat);
-    logger.debug(routes);
-    return routes;
-  }).catch(error => {
+  return qtapi.pricelist()
+    .then(buildSubcategoryList)
+    .catch(error => {
     logger.error("getAllSubcategories error:", error);
     return Promise.reject(error);
   });
+}
+
+
+const buildSubcategoryList = response => {
+  logger.info("buildSubcategoryList");
+  const routesByCat = response.categories.map(cat => {
+    const routeBase = {
+      id: cat.categoryId,
+      name: cat.categoryName
+    };
+    return cat.subcategories.map(subcat => {
+      return Object.assign( {}, routeBase, {
+        subcategoryId: subcat.subcategoryId,
+        subcategoryName: subcat.subcategoryName
+      });
+    });
+  });
+
+  var routes = [].concat.apply([],routesByCat);
+  logger.debug("buildSubcategoryList responses", routes);
+  return routes;
 }
 
 const getRoute = (subcatId) => {
@@ -116,15 +170,15 @@ const getRoute = (subcatId) => {
 }
 
 
-const loadReferential = () => {
+const loadReferentialFromDisk = () => {
   logger.info("call loadReferential");
   const res = fs.readFileSync('./lib/data/referential.json');
   const routes = JSON.parse(res);
   return routes;
 }
 
-const extractLocations = () => {
-  const routes = loadReferential();
+const extractLocationsFromDisk = () => {
+  const routes = loadReferentialFromDisk();
   const locations = routes.map(route => {
     const location1 = createLocation(route, route.first);
     const location2 = createLocation(route, route.last);
@@ -144,7 +198,7 @@ const extractLocations = () => {
   return res;
 }
 
-const loadLocations = () => {
+const loadLocationsFromFile = () => {
   const res = fs.readFileSync('./lib/data/locationsGroupedBy.json');
   const locations = JSON.parse(res);
   return locations;
@@ -201,10 +255,12 @@ var groupBy = function(xs, key) {
 module.exports = {
 //  getRoute: getRoute,
   requestAndSavePriceList: requestAndSavePriceList,
-  loadPriceList: loadPriceList,
+  loadPriceList: loadPriceListFromFile,
   createReferential: createReferential,
-  loadReferential:loadReferential,
+  loadReferential:loadReferentialFromDisk,
+  extractLocationsFromDisk:extractLocationsFromDisk,
   extractLocations:extractLocations,
-  loadLocations:loadLocations,
+  buildReferential: buildReferential,
+  loadLocations:loadLocationsFromFile,
   convertAsList:convertAsList
 }

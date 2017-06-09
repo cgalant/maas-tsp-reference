@@ -1,6 +1,6 @@
 'use strict';
 
-const qtAPI = require('../lib/quickticket-api');
+const qtapi = require('../lib/quickticket-api');
 const log4s = require('log4js');
 const logger = log4s.getLogger('booking-qt-options-list');
 const validateCoordinates = require('../lib/util').validateCoordinates;
@@ -73,80 +73,6 @@ const findNearestLocation = (places, location) => (
 const TICKETTYPE_ADULT_SINGLE = 'ENK';
 const DEFAULT_CURRENCY = 'EUR';
 
-/**
- * Format a response that conforms to the TSP response schema
- */
-function formatResponse(priceListResponse, parsedRequest) {
-
-//  logger.debug(parsedRequest);
-  const categories = priceListResponse.categories;
-  const cat = categories[0];
-  const subs = cat.subcategories;
-  const subcat = subs[0];
-  const tickets = subcat.tickets;
-  const res = tickets.filter(t => t.ticketType==TICKETTYPE_ADULT_SINGLE);
-//  logger.debug(res[0]);
-
-  const ticket = res[0];
-  const finalPriceForCustomer = Math.round(ticket.priceExt * ticket.vatFactor * 100) / 100;
-
-  const formattedStations =
-    [{
-      cost: {
-        amount: finalPriceForCustomer,
-        currency: DEFAULT_CURRENCY
-      },
-      terms: {
-        /*validity:{
-          startTime:
-          endTime:
-        }*/
-      },
-      tspProduct:{
-        id: "QT-"+ticket.ticketId
-      },
-      leg: {
-        mode: 'BUS',
-        startTime: parsedRequest.startTime,
-        endTime: parsedRequest.endTime,
-        from: {
-          lat: 1,
-          lon: 2,
-        },
-        to: {
-          lat: 1,
-          lon: 2,
-        },
-      },
-      meta: {
-        MODE_BUS: {
-        }
-      }
-    }];
-
-  return {
-    options: formattedStations,
-  };
-}
-
-/**
- * Booking options list responder
- * @param {object} event
- * @param {function} callback
- * @returns {Promise} A promise that lastly calls `callback` with the TSP response
- */
-const optionsList = (event, callback) => {
-
-  return validateEventData(event)
-    .then(event => qtAPI.pricelist())
-//    .then(results => findNearestNetwork(results, event.from))
-//    .then(closestNetwork => citybikesAPI.products(closestNetwork))
-//    .then(availableNetwork => formatResponse(availableNetwork.network.stations, event))
-    .then(results => formatResponse(results, event))
-    .then(result => callback(null, result))
-    .catch(error => callback(error));
-
-};
 const refbuilder = require('../lib/referential-builder');
 
 const findNearestPlace = (places, place) => {
@@ -156,7 +82,13 @@ const findNearestPlace = (places, place) => {
   return nearestPlace;
 }
 
-const optionsList2 = (event, callback) => {
+/**
+ * Booking options list responder
+ * @param {object} event
+ * @param {function} callback
+ * @returns {Promise} A promise that lastly calls `callback` with the TSP response
+ */
+const optionsListWithLocalFiles = (event, callback) => {
 
   var from = null;
   var to = null;
@@ -181,7 +113,52 @@ const optionsList2 = (event, callback) => {
     .then(results => findNearestLocation(results, from))
     .then(nearest => findLegs(locationsMap[nearest.id]))
     .then(legs=> filterLegsByDestination(legs, to))
-    .then(place => formatResponse2(place, event, pricelist.categories))
+    .then(place => formatResponse(place, event, pricelist.categories))
+    .then(result => callback(null, result))
+    .catch(error => callback(error));
+
+};
+
+const optionsListInMemory = (event, callback) => {
+
+  var from = null;
+  var to = null;
+  var pricelist = null;
+  var routesReferential = null;
+  var locationsMap = null;
+  var locationsList = null;
+
+  return validateEventData(event)
+    .then(validatedEvent => {
+      from = validatedEvent.from;
+      to = validatedEvent.to;
+
+      /*
+      locationsMap = refbuilder.loadLocations();
+      pricelist = refbuilder.loadPriceList();
+      locationsList = refbuilder.convertAsList(locationsMap);
+      return locationsList;
+      */
+      return qtapi.pricelist()
+    })
+    .then(priceListResponse => {
+      pricelist = priceListResponse;
+      return refbuilder.buildReferential(priceListResponse);
+    }).then(routesRef => {
+      routesReferential = routesRef;
+      locationsMap = refbuilder.extractLocations(routesRef);
+      locationsList = refbuilder.convertAsList(locationsMap);
+      return locationsList;
+    })
+    /*
+     .then(results => {
+     logger.debug(results);
+     return results;
+     })*/
+    .then(results => findNearestLocation(results, from))
+    .then(nearest => findLegs(locationsMap[nearest.id], routesReferential))
+    .then(legs=> filterLegsByDestination(legs, to))
+    .then(place => formatResponse(place, event, pricelist.categories))
     .then(result => callback(null, result))
     .catch(error => callback(error));
 
@@ -219,7 +196,7 @@ function filterLegsByDestination(legs, dest){
     logger.warn("no nearest stations found ! return all legs");
     return legs;
   }
-  const filteredLegs = legs.filter(leg =>{
+  const filteredLegs = legs.filter(leg => {
     const id = leg.last.lat+","+leg.last.long;
     return id == nearest.id;
   });
@@ -228,9 +205,8 @@ function filterLegsByDestination(legs, dest){
   return filteredLegs;
 }
 
-function findLegs(departures){
+function findLegs(departures, ref){
 //  logger.debug("findLegs departures=", departures);
-  const ref = refbuilder.loadReferential()
 
   const found = departures.map(dept =>{
     return ref.filter(cat => cat.id==dept.from.categoryId && cat.subcategoryId == dept.from.subcategoryId)
@@ -240,7 +216,7 @@ function findLegs(departures){
   return legs;
 }
 
-function formatResponse2(legs, parsedRequest, categories) {
+function formatResponse(legs, parsedRequest, categories) {
 
 //  logger.debug("formatResponse2 legs", legs);
 //  logger.debug("formatResponse2 parsedRequest", parsedRequest);
@@ -302,4 +278,4 @@ function formatResponse2(legs, parsedRequest, categories) {
 
 }
 
-module.exports.optionsList = optionsList2;
+module.exports.optionsList = optionsListInMemory;
