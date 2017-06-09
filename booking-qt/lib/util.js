@@ -58,11 +58,14 @@ const nearestLocation = (reference, locations) => {
     ) ? prev : curr
   ));
 
+//  const distance = euclideanDistance(reference.lat, reference.lon, nearest.lat, nearest.lon);
+//  console.log("euclideanDistance nearest before=",nearest);
+//  console.log("distance="+distance)
   //Check if closest found network is inside boundaries
   if (! (euclideanDistance(reference.lat, reference.lon, nearest.lat, nearest.lon) < threshold)) {
     nearest = {};
   }
-//  console.log("euclideanDistance nearest=",nearest);
+//  console.log("euclideanDistance nearest after=",nearest);
   return nearest;
 };
 

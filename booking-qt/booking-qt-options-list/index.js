@@ -1,6 +1,8 @@
 'use strict';
 
 const qtAPI = require('../lib/quickticket-api');
+const log4s = require('log4js');
+const logger = log4s.getLogger('booking-qt-options-list');
 const validateCoordinates = require('../lib/util').validateCoordinates;
 const nearestLocation = require('../lib/util').nearestLocation;
 
@@ -21,11 +23,20 @@ const validateEventData = event => (
       }
     }
 
+    let parsedEventTo = null;
+    if(event.to.indexOf(",")>=0){
+      const toCoords = event.to.split(",");
+      parsedEventTo = {
+        lat: toCoords[0],
+        lon: toCoords[1]
+      }
+    }
+
     const parsed = {
       mode: event.mode,
       from: parsedEventFrom,
       // API Gateway gives even undefined values as strings
-      to: event.to !== '' ? event.to : null,
+      to: event.to !== '' ? parsedEventTo : null,
       startTime: event.startTime,
       endTime: event.endTime !== '' ? event.endTime : event.startTime,
     };
@@ -37,8 +48,8 @@ const validateEventData = event => (
     if (!validateCoordinates(parsed.from)) {
       return reject(new Error(`400: "from" should be valid coordinates, got ${event.from}`));
     }
-//    console.log("validateEventData parsedEventFrom=", parsedEventFrom);
-//    console.log("validateEventData parsed=", parsed);
+//    logger.debug("validateEventData parsedEventFrom=", parsedEventFrom);
+//    logger.debug("validateEventData parsed=", parsed);
 
     return resolve(parsed);
   })
@@ -67,14 +78,14 @@ const DEFAULT_CURRENCY = 'EUR';
  */
 function formatResponse(priceListResponse, parsedRequest) {
 
-//  console.log(parsedRequest);
+//  logger.debug(parsedRequest);
   const categories = priceListResponse.categories;
   const cat = categories[0];
   const subs = cat.subcategories;
   const subcat = subs[0];
   const tickets = subcat.tickets;
   const res = tickets.filter(t => t.ticketType==TICKETTYPE_ADULT_SINGLE);
-//  console.log(res[0]);
+//  logger.debug(res[0]);
 
   const ticket = res[0];
   const finalPriceForCustomer = Math.round(ticket.priceExt * ticket.vatFactor * 100) / 100;
@@ -139,8 +150,8 @@ const optionsList = (event, callback) => {
 const refbuilder = require('../lib/referential-builder');
 
 const findNearestPlace = (places, place) => {
-  console.log("findNearestPlace places", places)
-  console.log("findNearestPlace place", place)
+  logger.debug("findNearestPlace places", places)
+  logger.debug("findNearestPlace place", place)
   const nearestPlace = places.filter(p => p.coords==place.id);
   return nearestPlace;
 }
@@ -148,6 +159,7 @@ const findNearestPlace = (places, place) => {
 const optionsList2 = (event, callback) => {
 
   var from = null;
+  var to = null;
   var pricelist = null;
   var locationsMap = null;
   var locationsList = null;
@@ -155,6 +167,7 @@ const optionsList2 = (event, callback) => {
   return validateEventData(event)
     .then(validatedEvent => {
       from = validatedEvent.from;
+      to = validatedEvent.to;
       locationsMap = refbuilder.loadLocations();
       pricelist = refbuilder.loadPriceList();
       locationsList = refbuilder.convertAsList(locationsMap);
@@ -162,12 +175,12 @@ const optionsList2 = (event, callback) => {
     })
     /*
     .then(results => {
-      console.log(results);
+      logger.debug(results);
       return results;
     })*/
     .then(results => findNearestLocation(results, from))
     .then(nearest => findLegs(locationsMap[nearest.id]))
-    .then(legs=> filterLegsByDestination(legs, event.to))
+    .then(legs=> filterLegsByDestination(legs, to))
     .then(place => formatResponse2(place, event, pricelist.categories))
     .then(result => callback(null, result))
     .catch(error => callback(error));
@@ -175,41 +188,73 @@ const optionsList2 = (event, callback) => {
 };
 
 function filterLegsByDestination(legs, dest){
-  console.log("filterLegsByDestination with dest=",dest)
+//  logger.debug("filterLegsByDestination with dest=",dest)
   if(!dest){
     return legs;
   }
   //TODO
-  return legs;
+  /*
+  1. extraire les last
+  2. findNearestLoc des last
+  3. filter
+   */
+
+  const destinations = legs.map(leg =>{
+    //logger.debug(leg);
+    const loc = leg.last;
+    const id = loc.lat+","+loc.long;
+    return {
+      id: id,
+      coords: id,
+      lat: loc.lat,
+      lon: loc.long,
+    }
+  });
+//  logger.debug("destinations: ", destinations);
+
+  const nearest = nearestLocation(dest, destinations);
+//  logger.debug("nearest place from evnt.to : ", nearest);
+
+  if(!nearest){
+    logger.warn("no nearest stations found ! return all legs");
+    return legs;
+  }
+  const filteredLegs = legs.filter(leg =>{
+    const id = leg.last.lat+","+leg.last.long;
+    return id == nearest.id;
+  });
+
+//  logger.debug("filteredLegs : ", filteredLegs);
+  return filteredLegs;
 }
 
 function findLegs(departures){
-//  console.log("findLegs departures=", departures);
+//  logger.debug("findLegs departures=", departures);
   const ref = refbuilder.loadReferential()
 
   const found = departures.map(dept =>{
     return ref.filter(cat => cat.id==dept.from.categoryId && cat.subcategoryId == dept.from.subcategoryId)
   });
   var legs = [].concat.apply([],found);
-//  console.log("legs ", legs );
+//  logger.debug("legs ", legs );
   return legs;
 }
 
 function formatResponse2(legs, parsedRequest, categories) {
 
-//  console.log("formatResponse2 legs", legs);
-//  console.log("formatResponse2 parsedRequest", parsedRequest);
-//  console.log("formatResponse2 categories", categories);
+//  logger.debug("formatResponse2 legs", legs);
+//  logger.debug("formatResponse2 parsedRequest", parsedRequest);
+//  logger.debug("formatResponse2 categories", categories);
 
   const formattedStations = legs.map(leg => {
 
-    //console.log("leg=",leg);
+    //logger.debug("leg=",leg);
 
 //    const cats = categories.find((cat, index, arr) => leg.id == cat.categoryId);
     const cat = categories.find(function(el, index, arr){
       return leg.id == el.categoryId
     });
-    //console.log("cat found : ",cat);
+    //logger.debug("cat found : ",cat);
 
 
     const subcat = cat.subcategories.find((subcat, index, arr) => leg.subcategoryId == subcat.subcategoryId);
@@ -250,7 +295,7 @@ function formatResponse2(legs, parsedRequest, categories) {
     }
   });
 
-//  console.log(formattedStations);
+//  logger.debug(formattedStations);
   return {
     options: formattedStations,
   };
