@@ -6,20 +6,50 @@ const log4js = require('log4js');
 const logger = log4js.getLogger("QUICKTICKET-API");
 
 // Configuration
-//const QUICKTICKET_ENDPOINT_URL = process.env.QUICKTICKET_ENDPOINT_URL;
-const QUICKTICKET_ENDPOINT_URL = 'https://test.flygbussarna.se/qt/api/';
+const QUICKTICKET_ENDPOINT_URL = process.env.QUICKTICKET_ENDPOINT_URL || 'https://test.flygbussarna.se/qt/api/';
+const QUICKTICKET_USERNAME = process.env.QUICKTICKET_USERNAME || 'DIGITALFAC';
+const QUICKTICKET_PASSWORD = process.env.QUICKTICKET_PASSWORD || '26hm4Lwm*ZCz#zE+';
+const QUICKTICKET_CLIENT_IP = process.env.QUICKTICKET_CLIENT_IP || '80.15.195.217';
 
-const USER_TOKEN = 'ja7vkdArCg7g8rKjLedASdeAENyY1b32tJJtccVxMyNJQVQhuBFzIQQE7f0gdAbrW+drJUOy5gRKlT48MeF5wwRZAnradYojdqb+bKZShVDmqOPg0XNn32gHGF3W122ODEwP+bReortIMhR1JkOk/5yncBSWP/cJY/Cy6lBTnbDePaqvHno7hmWYdVOeOFc5g/6DCco+TPmdD7txFFjtjw==';
+const USER_TOKEN = 'if8lfyRjp7G030Sj2xAMVGO0gPmDhiWlCTbH4MSRAiWxHH5q0pE5p0TNEKVwPQzPxkWrIdDn3jsCA31KNj+Vqxxhm0kDqZC7zjGNvSitjtT+k6X2wJjurFxbl5j3wB0X6evoKYfvUeJ3FWivZGKQy7bDNOarFGh3Je7m2IZQTfbpJZggq+ym0XmUSdLM5/S+';
+
+const DEFAULT_HEADERS = { 'Content-Type':'application/json', 'Accept':'application/json' }
+
+const headersWithToken = (token) => {
+  return Object.assign({}, DEFAULT_HEADERS, {'X-AuthToken': token})
+}
+
+const authenticate = () => {
+  logger.info("call authenticate");
+
+  var options = {
+    headers: DEFAULT_HEADERS,
+    body:
+      { username: QUICKTICKET_USERNAME,
+        password: QUICKTICKET_PASSWORD,
+        clientIp:  QUICKTICKET_CLIENT_IP},
+    json: true };
+
+  return request.post(`${QUICKTICKET_ENDPOINT_URL}/authentication`,options)
+    .then(response => {
+      if(response.success){
+        logger.info("authenticated with token="+response.token);
+        logger.debug("response=",response);
+      }else{
+        logger.error("authenticate failed", response);
+      }
+    }).catch(error => {
+      logger.error("authenticate error:", error);
+      return Promise.reject(error);
+    });
+
+}
 
 const pricelist = () => {
   logger.info("call pricelist");
   return request
     .get(`${QUICKTICKET_ENDPOINT_URL}/pricelist`, {
-      headers: {
-        'Content-Type':'application/json',
-        'Accept':'application/json',
-        'X-AuthToken': USER_TOKEN
-      },
+      headers: headersWithToken(USER_TOKEN),
       json: true
       //,verbose: true
     })
@@ -54,11 +84,7 @@ const create = (ticketId, customer) => {
 
   return request
     .post(`${QUICKTICKET_ENDPOINT_URL}/reservation`, {
-      headers: {
-        'Content-Type':'application/json',
-        'Accept':'application/json',
-        'X-AuthToken': USER_TOKEN
-      },
+      headers: headersWithToken(USER_TOKEN),
       body: body,
       json: true
       //,verbose: true
@@ -78,11 +104,7 @@ const getReservation = (id) => {
   logger.info("call getReservationDetail with id="+id);
   return request
     .get(`${QUICKTICKET_ENDPOINT_URL}/reservation/${id}`, {
-      headers: {
-        'Content-Type':'application/json',
-        'Accept':'application/json',
-        'X-AuthToken': USER_TOKEN
-      },
+      headers: headersWithToken(USER_TOKEN),
       json: true
       //,verbose: true
     })
@@ -97,11 +119,7 @@ const cancel = (id) => {
   logger.info("call cancel reservation with id="+id);
   return request
     .del(`${QUICKTICKET_ENDPOINT_URL}/reservation/${id}`, {
-      headers: {
-        'Content-Type':'application/json',
-        'Accept':'application/json',
-        'X-AuthToken': USER_TOKEN
-      }
+      headers: headersWithToken(USER_TOKEN),
     })
     .then(response => response)
     .catch(error => {
@@ -111,6 +129,7 @@ const cancel = (id) => {
 }
 
 module.exports = {
+  authenticate:authenticate,
   pricelist: pricelist,
   create: create,
   getReservation: getReservation,

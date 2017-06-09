@@ -12,5 +12,10 @@ function testCreate(){
   qtapi.create(1,{firstName:"toto", lastName:"titi", email:"toto@titi.me", phone:"0123456789"})
 }
 
-testPriceList();
+function testAuthenticate(){
+  qtapi.authenticate();
+}
+
+//testPriceList();
 //testCreate();
+testAuthenticate();
