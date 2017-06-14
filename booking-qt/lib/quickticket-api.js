@@ -59,18 +59,19 @@ const _pricelist = (authToken) => {
     })
     .then(response => {
       logger.info("pricelist response returns with id=" + response.pricelistId);
-//      logger.debug("pricelist response", response);
+      logger.debug("pricelist response", response);
       return response;
     })
-    .catch(error => {
-      logger.error("pricelist error:", error.message);
-      return Promise.reject(error);
-    });
 };
 
 const pricelist = () => {
   logger.info("call pricelist");
-  return _pricelist().catch( error => authenticate().then(_pricelist).catch(error => { logger.error("catch last _pricelist error", error); return Promise.reject(error);}));
+  return _pricelist().catch( error => {
+    if(isAuthenticationError(error))
+      return authenticate().then(_pricelist).catch(error => { return traceError(error, "catch last _pricelist error") })
+    else
+      return traceError(error, 'pricelist error');
+  });
 };
 
 const _create = (ticketId, customer, authToken) => {
@@ -100,19 +101,20 @@ const _create = (ticketId, customer, authToken) => {
     })
     .then(response => {
       logger.info("reservation created with id="+response.reservationId);
-//      logger.debug("create response", response);
+      logger.debug("create response", response);
       return response
     })
-    .catch(error => {
-      logger.error("create error:", error);
-      return Promise.reject(error);
-    });
+
 };
 
 const create = (ticketId, customer) => {
   logger.info("call create with ticketId=" + ticketId + " &customer=", customer);
-  return _create(ticketId, customer).catch(error => authenticate().then(token => _create(ticketId, customer, token)).catch(error => { logger.error("catch last _create error", error); return Promise.reject(error);}));
-//  return _create(ticketId, customer);
+  return _create(ticketId, customer).catch(error => {
+    if(isAuthenticationError(error))
+      return authenticate().then(token => _create(ticketId, customer, token)).catch(error => { return traceError(error, "catch last _create error")})
+    else
+      return traceError(error, 'create error');
+  });
 }
 
 const _getReservation = (id, authToken) => {
@@ -124,16 +126,30 @@ const _getReservation = (id, authToken) => {
       //,verbose: true
     })
     .then(response => response)
-    .catch(error => {
-      logger.error("getReservationDetail error:", error);
-      return Promise.reject(error);
-    });
 };
 
 const getReservation = (id) => {
   logger.info("call getReservationDetail with id=" + id);
-  return _getReservation(id).catch(error => authenticate().then(token => _getReservation(id, token)).catch(error => { logger.error("catch last _getReservation error", error); return Promise.reject(error);}));
+  return _getReservation(id).catch(error => {
+    if(isAuthenticationError(error))
+      return authenticate().then(token => _getReservation(id, token)).catch(err => { return traceError(err, "catch last _getReservation error"); });
+    else {
+      return traceError(error, "getReservationDetail error");
+    }
+  });
 };
+
+const isAuthenticationError = (error) => {
+  return (error && error.message && error.message.indexOf('Invalid token')>0);
+}
+
+const traceError= (error, msg) => {
+  if(error && error.message)
+    logger.error(msg+ ' => '+ error.message);
+  else
+    logger.error(msg, error);
+  return Promise.reject(error);
+}
 
 const _cancel = (id, authToken) => {
   logger.debug("call _cancel reservation with id="+id+ " &authToken="+authToken);

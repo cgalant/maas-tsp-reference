@@ -26,16 +26,16 @@ function testAuthenticate(){
   qtapi.authenticate();
 }
 
-
-//testAuthenticate();
-//testPriceList();
-//testCreate();
-//testGetReservation();
-
 function testNumberNull(){
 //  var num = Number("5.255");
   var num = Number(null);
   console.log(num);
 }
 
-testNumberNull();
+//testNumberNull();
+
+//testAuthenticate();
+//testPriceList();
+//testCreate();
+testGetReservation();
+
