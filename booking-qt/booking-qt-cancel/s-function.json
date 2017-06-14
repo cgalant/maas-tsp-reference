@@ -1,10 +1,10 @@
 {
-  "name": "booking-citybikes-cancel",
+  "name": "booking-qt-cancel",
   "runtime": "nodejs4.3",
-  "description": "Serverless Lambda function for project: MaaS-transport",
+  "description": "Serverless Lambda function for project: MaaS-transport FlygBussarna QuickTicket TSP",
   "customName": false,
   "customRole": false,
-  "handler": "booking-citybikes-cancel/handler.handler",
+  "handler": "booking-qt-cancel/handler.handler",
   "timeout": 30,
   "memorySize": 1024,
   "authorizer": {},
@@ -20,7 +20,7 @@
   },
   "endpoints": [
     {
-      "path": "/citybikes/bookings/{tspId}",
+      "path": "/quickticket/bookings/{tspId}",
       "method": "DELETE",
       "type": "AWS",
       "authorizationType": "none",
