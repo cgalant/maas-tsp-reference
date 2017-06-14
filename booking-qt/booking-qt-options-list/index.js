@@ -1,7 +1,7 @@
 'use strict';
 
 const qtapi = require('../lib/quickticket-api');
-const log4s = require('log4js');
+const log4s = require('../lib/logging-config');
 const logger = log4s.getLogger('booking-qt-options-list');
 const validateCoordinates = require('../lib/util').validateCoordinates;
 const nearestLocation = require('../lib/util').nearestLocation;
@@ -256,12 +256,12 @@ function formatResponse(legs, parsedRequest, categories) {
         startTime: parsedRequest.startTime,
         endTime: parsedRequest.endTime,
         from: {
-          lat: leg.first.lat,
-          lon: leg.first.long,
+          lat: Number(leg.first.lat),
+          lon: Number(leg.first.long),
         },
         to: {
-          lat: leg.last.lat,
-          lon: leg.last.long,
+          lat: Number(leg.last.lat),
+          lon: Number(leg.last.long),
         },
       },
       meta: {

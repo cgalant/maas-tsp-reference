@@ -1,6 +1,6 @@
 'use strict';
 
-const refbuider = require('./lib/referential-builder');
+const refbuider = require('../../../booking-qt/lib/referential-builder');
 
 
 function testCreateRef(){

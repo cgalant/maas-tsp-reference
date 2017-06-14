@@ -3,7 +3,7 @@
 const qtapi = require('./quickticket-api');
 const request = require('request-promise-lite');
 const fs = require('fs');
-const log4js = require('log4js');
+const log4js = require('./logging-config');
 const logger = log4js.getLogger("REF-BUILDER");
 
 
@@ -163,7 +163,7 @@ const getRoute = (subcatId) => {
       return res;
     })
     .catch(error => {
-      logger.error("getRoute error:", error);
+      logger.warn("getRoute error:", error.toString());
       //return Promise.reject(error);
       return [];
     });

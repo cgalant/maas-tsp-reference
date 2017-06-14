@@ -1,5 +1,7 @@
 'use strict';
 const moment = require('moment');
+const log4js = require('./logging-config');
+const logger = log4js.getLogger("RESPONSE-MAPPER");
 
 /**
  * Format a response that conforms to the TSP booking-create response schema
@@ -12,7 +14,7 @@ const formatReservationResponse = (reservationResponse, parsedRequest) => {
   const startTime = moment.parseZone(reservationResponse.validFrom).unix();
   const endTime = moment.parseZone(reservationResponse.endTime).unix();
 
-  console.log("formatResponse customer:", parsedRequest.customer);
+  logger.debug("formatResponse customer:", parsedRequest.customer);
 
   return Promise.resolve({
     cost: {

@@ -47,6 +47,7 @@
     "haversine": "1.0.x",
     "istanbul": "0.4.x",
     "lambda-wrapper": "0.1.x",
+    "log4js": "^1.1.1",
     "moment": "2.18.x",
     "moment-timezone": "0.5.x",
     "serverless": "0.5.5",
